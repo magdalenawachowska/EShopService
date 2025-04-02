@@ -1,3 +1,5 @@
+using EShop.Domain.Exceptions;
+
 namespace EShop.Application.Tests
 {
     public class CreditCardTest
@@ -13,11 +15,13 @@ namespace EShop.Application.Tests
             //Arrange
             var card_number = new CreditCardService();
             //Act
-            var result = card_number.ValidateCard(number);
+            var result = card_number.ValidateCard(number);          
             //Assert
             Assert.Equal(expected, result);
         }
 
+
+        /* testy - za krotkie lub za dlugie numery kart
         [Theory]
         [InlineData("", false)]
         [InlineData("12345", false)]
@@ -32,6 +36,70 @@ namespace EShop.Application.Tests
             //Assert
             Assert.Equal(expected, result);
         }
+        */
+
+        [Theory]
+        [InlineData("")]                           
+        [InlineData("12345")]
+        [InlineData("123-456-789")]
+        public void ValidateCard_TooShortNumber_ThrowsException(string number)  
+        {
+            //Arrange
+            var card_number = new CreditCardService();
+
+            //Act 
+            //var result = card_number.ValidateCard(number);
+            var action = () => card_number.ValidateCard(number);
+
+            //Assert
+            Assert.Throws<CardNumberTooShortException>(() => action);
+        }
+
+        [Theory]
+        [InlineData("4024-0071-6540-1778--6540-1778")]                           
+        [InlineData("4532289052809181289052809181")]
+        [InlineData("1234 5678 9123 4567 8912 3456")]
+        public void ValidateCard_TooLongNumber_ThrowsException(string number) 
+        {
+            //Arrange
+            var card_number = new CreditCardService();
+
+            //Act 
+            var action = () => card_number.ValidateCard(number);
+
+            //Assert
+            Assert.Throws<CardNumberTooLongException>(() => action);
+        }
+
+        [Theory]
+        [InlineData("AB1234D901234")]
+        [InlineData("5551AC14438D6215")]
+        [InlineData("45322890528091B1")]
+        public void ValidateCard_NotAllDigits_ThrowsException(string number)
+        {
+            //Arrange
+            var card_number = new CreditCardService();
+
+            //Act 
+            var action = () => card_number.ValidateCard(number);
+
+            //Assert
+            Assert.Throws<CardNumberInvalidException>(() => action);
+        }
+
+        [Fact]
+        public void ValidateCard_NotAllDigits_ThrowsWithExpectedMessage()
+        {
+            //Arrange
+            var card_number = new CreditCardService();
+
+            //Act 
+            var exception = Assert.Throws<CardNumberInvalidException>(() => card_number.ValidateCard("4024-0071-6540-I77B"));
+
+            //Assert
+            Assert.Equal("Invalid card number", exception.Message);                    //not all characters are digit
+        }
+
 
 
         [Theory]
@@ -59,7 +127,8 @@ namespace EShop.Application.Tests
             //Act
             var result = card_number.GetCardType("1ABC2345601E09");
             //Assert
-            Assert.Equal("Not recognized", result);
+            //Assert.Equal("Not recognized", result);
+            Assert.Throws<CardNumberInvalidException>(() => result);
         }
 
 
