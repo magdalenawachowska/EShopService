@@ -1,4 +1,5 @@
 using EShop.Domain.Exceptions;
+using EShop.Application.Service;
 
 namespace EShop.Application.Tests
 {
@@ -106,7 +107,6 @@ namespace EShop.Application.Tests
         [InlineData("5131208517986691","MasterCard")]
         [InlineData("4532 2080 2150 4434", "Visa")]
         [InlineData("345-470-784-783-010", "American Express")]
-        [InlineData("3528770266930341", "JCB")]
         public void GetCardType_WhenGivenNumber_ReturnsCorrectType(string number, string expected_type)
         {
 

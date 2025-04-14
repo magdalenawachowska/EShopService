@@ -2,16 +2,16 @@
 using EShop.Domain.Enums;
 using EShop.Domain.Exceptions;               //importuje wyjatki z innego projektu
 
-namespace EShop.Application
+namespace EShop.Application.Service
 {
-    public class CreditCardService : ICreditCardService 
+    public class CreditCardService : ICreditCardService
     {
         public bool ValidateCard(string cardNumber)                  //void?  - Boolean !
         {
             if (string.IsNullOrEmpty(cardNumber))
                 throw new CardNumberTooShortException("Card number is too short.");
-            
-            cardNumber = cardNumber.Replace(" ", "").Replace("-", "");  
+
+            cardNumber = cardNumber.Replace(" ", "").Replace("-", "");
             if (!cardNumber.All(char.IsDigit))
                 throw new CardNumberInvalidException("Invalid card number- not all characters ale digit");
 
@@ -35,7 +35,7 @@ namespace EShop.Application
 
             if (sum % 10 == 0)
             {
-                
+
                 if (cardNumber.Length >= 13 && cardNumber.Length <= 19)
                 {
                     return true;
@@ -43,20 +43,21 @@ namespace EShop.Application
                 if (cardNumber.Length > 19)
                 {
                     throw new CardNumberTooLongException("Card number is too long.");
-                   
+
                 }
                 else if (cardNumber.Length < 13)
                 {
                     throw new CardNumberTooShortException("Card number is too short.");
                 }
             }
-            else {
+            else
+            {
                 throw new CardNumberInvalidException("Card number is not valid with Luna algorithm.");
-                 }
+            }
 
 
             return false;
-           
+
         }
 
         public string GetCardType(string cardNumber)
@@ -72,8 +73,8 @@ namespace EShop.Application
                 return CreditCardProvider.AmericanExpress.ToString();
 
             else
-                throw new CardNumberInvalidException("");             
-            
+                throw new CardNumberInvalidException("");
+
         }
     }
 }

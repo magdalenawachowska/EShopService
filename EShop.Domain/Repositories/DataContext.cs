@@ -13,6 +13,6 @@ namespace EShop.Domain.Models
 
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
-        public DbSet<Product> Products { get; set; }               //przeksztalcenie na encje bazodanowa
+        public DbSet<Product> Products { get; set; }               //przeksztalcenie na encje bazodanowa  - reprezentacja tabeli "Products"
     }
 }
