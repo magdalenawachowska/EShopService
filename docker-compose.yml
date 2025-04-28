@@ -1,0 +1,6 @@
+services:
+  eshopservice:
+    image: ${DOCKER_REGISTRY-}eshopservice
+    build:
+      context: .
+      dockerfile: EShopService/Dockerfile

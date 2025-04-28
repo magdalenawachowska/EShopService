@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EShop.Domain.Seeders
+namespace EShopService.IntegrationTests
 {
-    public interface IEShopSeeder
+    public class CreditCardControllerIntegrationTest
     {
-        Task Seed();
     }
 }

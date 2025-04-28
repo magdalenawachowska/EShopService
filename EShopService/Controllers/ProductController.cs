@@ -3,8 +3,6 @@ using EShop.Application.Service;
 using EShopDomain.Models;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace EShopService.Controllers             //poprawic tego controllera jeszcze!
 {
     [Route("api/[controller]")]
@@ -44,15 +42,15 @@ namespace EShopService.Controllers             //poprawic tego controllera jeszc
         }
 
         //podlaczenie serwisu do controllera
-        [HttpGet("{id}")]
-        public async Task<ActionResult>Get(int id)
-        {
-            var result = await _productService.GetAsync(id);
-            if (result == null)
-            {
-                return NotFound();
-            }
-            return Ok(result);
-        }
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult>Get(int id)
+        //{
+        //    var result = await _productService.GetAsync(id);
+        //    if (result == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(result);
+        //}
     }
 }

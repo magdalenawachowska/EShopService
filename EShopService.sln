@@ -15,7 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EShop.Domain.Tests", "EShop
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6800B04B-365B-4227-81DD-9270B623A2D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShop.Service.Tests", "EShop.Service.Tests\EShop.Service.Tests.csproj", "{93C58A0F-DFEE-4128-8D4B-E531CCD28271}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EShop.Service.Tests", "EShop.Service.Tests\EShop.Service.Tests.csproj", "{93C58A0F-DFEE-4128-8D4B-E531CCD28271}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EShopService.IntegrationTests", "EShopService.IntegrationTests\EShopService.IntegrationTests.csproj", "{9F15E5F1-7617-4F15-81F5-520AF8EFA10F}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{CED85F2B-782F-4F4B-A8AD-E2953DFF2632}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,14 @@ Global
 		{93C58A0F-DFEE-4128-8D4B-E531CCD28271}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93C58A0F-DFEE-4128-8D4B-E531CCD28271}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93C58A0F-DFEE-4128-8D4B-E531CCD28271}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F15E5F1-7617-4F15-81F5-520AF8EFA10F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F15E5F1-7617-4F15-81F5-520AF8EFA10F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F15E5F1-7617-4F15-81F5-520AF8EFA10F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F15E5F1-7617-4F15-81F5-520AF8EFA10F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CED85F2B-782F-4F4B-A8AD-E2953DFF2632}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CED85F2B-782F-4F4B-A8AD-E2953DFF2632}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CED85F2B-782F-4F4B-A8AD-E2953DFF2632}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CED85F2B-782F-4F4B-A8AD-E2953DFF2632}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +67,7 @@ Global
 		{9F95EE39-28EC-41F9-BC1D-FEA5A1D357C1} = {6800B04B-365B-4227-81DD-9270B623A2D4}
 		{99FD5753-7844-45B7-AA97-DA2266A57564} = {6800B04B-365B-4227-81DD-9270B623A2D4}
 		{93C58A0F-DFEE-4128-8D4B-E531CCD28271} = {6800B04B-365B-4227-81DD-9270B623A2D4}
+		{9F15E5F1-7617-4F15-81F5-520AF8EFA10F} = {6800B04B-365B-4227-81DD-9270B623A2D4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CCDCB420-A381-4929-AD7D-31EFD4F05730}

@@ -68,7 +68,7 @@ namespace EShop.Domain.Repositories
         }
         public void Delete(int id)
         {
-            var product = _context.Products.Find((id);
+            var product = _context.Products.Find((id));
             if (product != null)
             {
                 _context.Products.Remove(product);

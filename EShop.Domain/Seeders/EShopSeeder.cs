@@ -10,32 +10,31 @@ using EShopDomain.Models;
 
 namespace EShop.Domain.Seeders
 {
-    public class EShopSeeder (DataContext context) : IEShopSeeder    //static
+    public class EShopSeeder : IEShopSeeder    //static
     {
+        private readonly DataContext _context;
 
-        //public async Task Seed(DataContext context)
-        public static void Seed()
-        //public async Seed()
+        public EShopSeeder(DataContext context)
         {
-            if (!context.Products.Any())                                  //o co chodzi ze nie moze byc null? /wskrzykiwanie zaleznosci??
+            _context = context;
+        }
+
+        public async Task Seed()
+        {
+            if (await _context.Database.CanConnectAsync())
             {
-                
-                var products = new List<Product>
+                if (!_context.Products.Any())                                  //sprawdzamy czy jest pusta
+                {
+
+                    var products = new List<Product>
                 {
                    new Product { Name= "Phone", Ean="1234"},
                    new Product { Name= "Computer", Ean="4567" },
                    new Product { Name="Headphones", Ean="8910" }
                 };
-                context.Products.AddRange(products);
-                /*
-                context.Products.AddRange(
-                    new Product { Name = "Phone", Ean="1234" },           //nie ustawiam id, bo EF Core go wygeneruje automatycznie!
-                    new Product { Name = "Earphones", Ean="431" },       //o ile kolumna id jest Identity 
-                    new Product { Name = "TV", Ean="12212" }
-                    );
-                */
-                context.SaveChanges();
-
+                    _context.Products.AddRange(products);
+                    await _context.SaveChangesAsync();
+                }
             }
         }
     }
