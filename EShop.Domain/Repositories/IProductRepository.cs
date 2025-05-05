@@ -10,13 +10,10 @@ namespace EShop.Domain.Repositories
     public interface IProductRepository                //interfejs repozytorium- definiuje metody do manipulacji danymi 
     {
 
-        #region Product 
-        Task<Product> GetProductAsync(int id);
-        Task<Product> GetByIdAsync(int id);
         Task<Product> AddProductAsync(Product product);
-        Task<Product> UpdateProductAsync(Product user);
         Task<List<Product>> GetAllProductAsync();
-        
-        #endregion
+        Task<Product> GetProductAsync(int id);
+        Task<Product> UpdateProductAsync(Product product);
+
     }
 }

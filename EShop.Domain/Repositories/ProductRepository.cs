@@ -75,10 +75,5 @@ namespace EShop.Domain.Repositories
                 _context.SaveChanges();
             }
         }
-
-        Task<Product> IProductRepository.GetByIdAsync(int id)                   //zaimplementowane ale do poprawienia
-        {
-            throw new NotImplementedException();
-        }
     }
 }
