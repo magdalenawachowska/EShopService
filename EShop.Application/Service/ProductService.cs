@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,12 @@ namespace EShop.Application.Service
     public class ProductService : IProductService
     {
         private IProductRepository _repository;
+        private readonly IMemoryCache _cache;
 
-        public ProductService(IProductRepository repository)
+        public ProductService(IProductRepository repository, IMemoryCache cache)
         {
             _repository = repository;
+            _cache = cache;
         }
 
         public async Task<List<Product>> GetAllAsync()
@@ -27,14 +30,24 @@ namespace EShop.Application.Service
 
         public async Task<Product> GetAsync(int id)
         {
-            var result = await _repository.GetProductAsync(id);
+            string key = $"Product:{id}";
+            if (!_cache.TryGetValue(key, out Product? product))
+            {
+                product = await _repository.GetProductAsync(id);
+                var options = new MemoryCacheEntryOptions()
+                     .SetAbsoluteExpiration(TimeSpan.FromDays(1));
 
-            return result;
+                _cache.Set(key, product, options);
+            }
+            return product;
+
         }
 
-        public async Task<Product> Update(Product product)
+        public async Task<Product> UpdateAsync(Product product)
         {
             var result = await _repository.UpdateProductAsync(product);
+            string key = $"Product:{product.Id}";
+            _cache.Remove(key);
 
             return result;
         }
