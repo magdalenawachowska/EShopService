@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EShop.Domain.Repositories;
-using EShopDomain.Models;
+using EShop.Domain.Models;
 
 namespace EShop.Application.Service
 {

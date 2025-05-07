@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using EShop.Application.Service;
-using EShopDomain.Models;
+using EShop.Domain.Models;
 using System.Threading.Tasks;
 
 namespace EShopService.Controllers             //poprawic tego controllera jeszcze!

@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using EShop.Domain.Repositories;
 using EShop.Domain.Models;
-using EShopDomain.Models;
 
 namespace EShop.Domain.Seeders
 {
