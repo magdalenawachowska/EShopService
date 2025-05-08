@@ -4,6 +4,7 @@ using EShop.Domain.Seeders;
 using EShop.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
+using EShop.Domain.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer());       //dodanie kontekstu bazy danych 
+//builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer());       //dodanie kontekstu bazy danych 
+builder.Services.AddInfranstructure(builder.Configuration);
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
