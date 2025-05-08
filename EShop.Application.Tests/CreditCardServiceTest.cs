@@ -98,9 +98,19 @@ namespace EShop.Application.Tests
             var exception = Assert.Throws<CardNumberInvalidException>(() => card_number.ValidateCard("4024-0071-6540-I77B"));
 
             //Assert
-            Assert.Equal("Invalid card number", exception.Message);                    //not all characters are digit
+            Assert.Equal("Invalid card number- not all characters ale digit", exception.Message);                  
         }
 
+        [Fact]
+        public void ValidateCard_NotValidWithLunaAlgorithm_ThrowsWithExpectedMessage()
+        {
+            //Arrange
+            var cardNumber = new CreditCardService();
+            //Act
+            var exception = Assert.Throws<CardNumberInvalidException>(() => cardNumber.ValidateCard("453228905280918123"));
+            //Assert
+            Assert.Equal("Card number is not valid with Luna algorithm.", exception.Message);
+        }
 
 
         [Theory]
@@ -125,12 +135,10 @@ namespace EShop.Application.Tests
             //Arrange
             var card_number = new CreditCardService();
             //Act
-            var result = card_number.GetCardType("1ABC2345601E09");
+            var exception = Assert.Throws<CardNumberInvalidException>(() => card_number.GetCardType("3528145728933714"));
             //Assert
-            //Assert.Equal("Not recognized", result);
-            Assert.Throws<CardNumberInvalidException>(() => result);
+            Assert.Equal("Not recognized card provider", exception.Message);
         }
-
 
     }
 }

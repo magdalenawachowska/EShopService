@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using EShop.Domain.Exceptions;
+using EShop.Domain.Models;
 using System.Net;
 using EShop.Application.Service;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace EShopService.Controllers
 {
@@ -38,33 +37,65 @@ namespace EShopService.Controllers
             }
             catch(CardNumberInvalidException ex)
             {
+                if (ex.Message == "Not recognized card provider")
+                {
+                    return StatusCode((int)HttpStatusCode.NotAcceptable, new { error = ex.Message, code = (int)HttpStatusCode.NotAcceptable });
+                }
                 return BadRequest(new { error = ex.Message, code = (int)HttpStatusCode.BadRequest });
             }
         }
 
-        // GET api/<CreditCardCoontroller>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST api/<CreditCardCoontroller>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] Card card)
         {
+            return Ok(card);
         }
 
         // PUT api/<CreditCardCoontroller>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] Card updatedCard)
         {
+            /*var card = _bazadanychkart.FirstOrDefault(c => c.Id == id);
+            if (card == null)
+                return NotFound(new { message = "Card doesn't exist" });
+
+            card.CardNUmber = updatedCard.CardNumber;
+
+            //to nizej to osobne rozwiazanie, mozliwe ze bledne xd
+
+            if (card.Id == id && card != null)
+            {
+                card.CardNumber = updatedCard.CardNumber;
+            }
+            else
+            {
+               return NotFound(new { message = "Not found any credit card with given id" });
+            }
+            
+            return NoContent();                         // 204 – aktualizacja zakończona bez zwracania danych
+            */
+
+            return Ok("Updated");
         }
 
         // DELETE api/<CreditCardCoontroller>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            /*
+            if (card.Id == id && card != null)
+            {
+                _bazadanychkart.Remove(card);
+                return Ok(new { message = "Card removed" });
+            }
+            else
+            {
+                return NotFound(new { message = "Not found any credit card with given id" });
+            }
+            */
+            return Ok("Removed");
         }
     }
 }

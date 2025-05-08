@@ -10,7 +10,7 @@ namespace EShop.Domain.Exceptions
     {
         public CardNumberTooShortException() { }
 
-        public CardNumberTooShortException(string message) : base("Card number is too short") { }
+        public CardNumberTooShortException(string message) : base(message) { }
 
         public CardNumberTooShortException (string message, Exception innerException) { }
     }
