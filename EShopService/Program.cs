@@ -22,7 +22,7 @@ namespace EShopService
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            //builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer());       //dodanie kontekstu bazy danych 
+            builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer());       //dodanie kontekstu bazy danych 
 
             builder.Services.AddInfranstructure(builder.Configuration);
 
