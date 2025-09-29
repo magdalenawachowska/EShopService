@@ -11,6 +11,5 @@ namespace EShop.Domain.Enums
         AmericanExpress,
         Visa,
         MasterCard
-
     }
 }

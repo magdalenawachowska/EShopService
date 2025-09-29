@@ -1,12 +1,12 @@
 ﻿using System.Text.RegularExpressions;
 using EShop.Domain.Enums;
-using EShop.Domain.Exceptions;               //importuje wyjatki z innego projektu
+using EShop.Domain.Exceptions;             
 
 namespace EShop.Application.Service
 {
     public class CreditCardService : ICreditCardService
     {
-        public bool ValidateCard(string cardNumber)                  //void?  - Boolean !
+        public bool ValidateCard(string cardNumber)                  
         {
             if (string.IsNullOrEmpty(cardNumber))
                 throw new CardNumberTooShortException("Card number is too short.");
@@ -24,7 +24,6 @@ namespace EShop.Application.Service
             {
                 throw new CardNumberTooShortException("Card number is too short.");
             }
-
 
             int sum = 0;
             bool alternate = false;                                      //flaga - identyfikuje co druga liczbe 
@@ -52,13 +51,11 @@ namespace EShop.Application.Service
             {
                 throw new CardNumberInvalidException("Card number is not valid with Luna algorithm.");
             }
-
         }
 
         public string GetCardType(string cardNumber)
         {
             cardNumber = cardNumber.Replace(" ", "").Replace("-", "");
-
 
             if (Regex.IsMatch(cardNumber, @"^4(\d{12}|\d{15}|\d{18})$"))
                 return CreditCardProvider.Visa.ToString();
@@ -70,7 +67,6 @@ namespace EShop.Application.Service
 
             else
                 throw new CardNumberInvalidException("Not recognized card provider");
-
         }
     }
 }

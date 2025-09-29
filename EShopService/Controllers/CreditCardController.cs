@@ -30,16 +30,19 @@ namespace EShopService.Controllers
             catch(CardNumberTooLongException ex)
             {
                 return StatusCode((int)HttpStatusCode.RequestUriTooLong, new { error = ex.Message, code = (int)HttpStatusCode.RequestUriTooLong });
+               // return StatusCode(414, new { message = ex.Message, code = 414 });
             }
             catch (CardNumberTooShortException ex)
             {
                 return BadRequest(new {error = ex.Message, code = (int)HttpStatusCode.BadRequest});
+                //return StatusCode(400, new { message = ex.Message, code = 400 });
             }
             catch(CardNumberInvalidException ex)
             {
                 if (ex.Message == "Not recognized card provider")
                 {
                     return StatusCode((int)HttpStatusCode.NotAcceptable, new { error = ex.Message, code = (int)HttpStatusCode.NotAcceptable });
+                    //return StatusCode(406, new { message = ex.Message, code = 406 });
                 }
                 return BadRequest(new { error = ex.Message, code = (int)HttpStatusCode.BadRequest });
             }
@@ -57,26 +60,6 @@ namespace EShopService.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Card updatedCard)
         {
-            /*var card = _bazadanychkart.FirstOrDefault(c => c.Id == id);
-            if (card == null)
-                return NotFound(new { message = "Card doesn't exist" });
-
-            card.CardNUmber = updatedCard.CardNumber;
-
-            //to nizej to osobne rozwiazanie, mozliwe ze bledne xd
-
-            if (card.Id == id && card != null)
-            {
-                card.CardNumber = updatedCard.CardNumber;
-            }
-            else
-            {
-               return NotFound(new { message = "Not found any credit card with given id" });
-            }
-            
-            return NoContent();                         // 204 – aktualizacja zakończona bez zwracania danych
-            */
-
             return Ok("Updated");
         }
 
@@ -84,17 +67,6 @@ namespace EShopService.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            /*
-            if (card.Id == id && card != null)
-            {
-                _bazadanychkart.Remove(card);
-                return Ok(new { message = "Card removed" });
-            }
-            else
-            {
-                return NotFound(new { message = "Not found any credit card with given id" });
-            }
-            */
             return Ok("Removed");
         }
     }

@@ -3,4 +3,11 @@
 GET {{UserService_HostAddress}}/weatherforecast/
 Accept: application/json
 
+POST {{UserService_HostAddress}}/api/Login
+Accept: application/json
+Content-Type: application/json
+{
+  "username": "admin",
+  "password": "password"
+}
 ###

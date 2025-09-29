@@ -24,9 +24,9 @@ namespace User.Application.Services
         {
 
             var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.NameIdentifier, userId.ToString())
-        };
+            {
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString())
+            };
 
             claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
@@ -37,7 +37,8 @@ namespace User.Application.Services
                 issuer: _settings.Issuer,
                 audience: _settings.Audience,
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(_settings.ExpiresInMinutes),
+                expires: DateTime.UtcNow.AddMinutes(_settings.ExpiresInMinutes),    
+                //expires: DateTime.Now.AddHours(1),
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

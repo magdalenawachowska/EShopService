@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EShop.Domain.Repositories
 {
-    public class ProductRepository : IProductRepository                  //implementacja repozytorium
+    public class ProductRepository : IProductRepository                
     {
         private readonly DataContext _context;
         public ProductRepository(DataContext context) 
@@ -35,39 +35,15 @@ namespace EShop.Domain.Repositories
             return product;
         }
 
-        public Product GetById(int id)
+        public async Task<Product?> DeleteProductAsync(int id)
         {
-            var product = _context.Products.Find(id);
+            var product = await _context.Products.FindAsync(id);
             if (product == null)
-            {
-                throw new InvalidOperationException($"Product with ID {id} is not existing.");
-            }
+                return null;
 
-            return product;
-        }
-
-        public IEnumerable<Product> GetAll()
-        {
-            return _context.Products.ToList();
-        }
-        public void Add(Product product)
-        {
-            _context.Products.Add(product);
-            _context.SaveChanges();
-        }
-        public void Update(Product product)
-        {
-            _context.Products.Update(product);
-            _context.SaveChanges();
-        }
-        public void Delete(int id)
-        {
-            var product = _context.Products.Find((id));
-            if (product != null)
-            {
-                _context.Products.Remove(product);
-                _context.SaveChanges();
-            }
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+            return product;                     //lub return true;
         }
     }
 }

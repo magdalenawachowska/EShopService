@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,11 +9,13 @@ namespace User.Domain.Models
 {
     public class UserRole
     {
+        [Key]
         public int Id { get; set; }
 
-        public int UserId { get; set; }
-        public string RoleName { get; set; } = default!;
+        [Required]
+        [MaxLength(50)]
+        public required string Name { get; set; } = default!;
 
-        public User User { get; set; } = default!;
+        public ICollection<User> Users { get; set; } = new List<User>();           
     }
 }

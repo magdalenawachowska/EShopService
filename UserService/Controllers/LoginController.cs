@@ -5,8 +5,6 @@ using User.Application.Services;
 using User.Domain.Exceptions;
 using User.Domain.Requests;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace UserService.Controllers
 {
     [Route("api/[controller]")]
@@ -20,8 +18,7 @@ namespace UserService.Controllers
             _loginService = loginService;
         }
 
-        [HttpGet]
-        [Authorize]
+        [HttpGet("admin-panel")]
         [Authorize(Policy = "AdminOnly")]
         public IActionResult AdminPage()
         {

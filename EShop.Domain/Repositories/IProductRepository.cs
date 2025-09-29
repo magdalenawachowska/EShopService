@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace EShop.Domain.Repositories
 {
-    public interface IProductRepository                //interfejs repozytorium- definiuje metody do manipulacji danymi 
+    public interface IProductRepository                
     {
-
         Task<Product> AddProductAsync(Product product);
         Task<List<Product>> GetAllProductAsync();
         Task<Product> GetProductAsync(int id);
         Task<Product> UpdateProductAsync(Product product);
-
+        Task <Product?> DeleteProductAsync(int id);
     }
 }

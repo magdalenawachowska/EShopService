@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageReference Include="xunit" Version="2.5.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
@@ -19,10 +20,27 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EShop.Domain\EShop.Domain.csproj" />
+    <ProjectReference Include="..\EShopService\EShopService.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
+
+    <!--<ItemGroup>
+	    <AssemblyAttribute Include="Xunit.CollectionBehaviorAttribute">
+		    <_Parameter1>DisableTestParallelization = true</_Parameter1>
+		    <_Parameter1_IsLiteral>true</_Parameter1_IsLiteral>
+	    </AssemblyAttribute>
+    </ItemGroup>-->
+	
+	<!--dobra to jednak trzeba dac bo balsam tez do dodal xdd-->
+
+	<!--<ItemGroup>
+		<AssemblyAttribute Include="Xunit.CollectionBehaviorAttribute">
+			<_Parameter1>DisableTestParallelization = true</_Parameter1>
+			<_Parameter1_IsLiteral>true</_Parameter1_IsLiteral>
+		</AssemblyAttribute>
+	</ItemGroup>-->                   <!--chwilowo zakomentowane ale to chyba po to zeby te testy add 1000 products poszly i mialy sens-->
 
 </Project>

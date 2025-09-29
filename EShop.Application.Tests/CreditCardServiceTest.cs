@@ -48,12 +48,8 @@ namespace EShop.Application.Tests
             //Arrange
             var card_number = new CreditCardService();
 
-            //Act 
-            //var result = card_number.ValidateCard(number);
-            var action = () => card_number.ValidateCard(number);
-
-            //Assert
-            Assert.Throws<CardNumberTooShortException>(() => action);
+            //Act & Assert
+            Assert.Throws<CardNumberTooShortException>(() => card_number.ValidateCard(number));
         }
 
         [Theory]
@@ -65,11 +61,8 @@ namespace EShop.Application.Tests
             //Arrange
             var card_number = new CreditCardService();
 
-            //Act 
-            var action = () => card_number.ValidateCard(number);
-
-            //Assert
-            Assert.Throws<CardNumberTooLongException>(() => action);
+            //Act & Assert
+            Assert.Throws<CardNumberTooLongException>(() => card_number.ValidateCard(number));
         }
 
         [Theory]
@@ -81,11 +74,8 @@ namespace EShop.Application.Tests
             //Arrange
             var card_number = new CreditCardService();
 
-            //Act 
-            var action = () => card_number.ValidateCard(number);
-
-            //Assert
-            Assert.Throws<CardNumberInvalidException>(() => action);
+            //Act & Assert 
+            Assert.Throws<CardNumberInvalidException>(() => card_number.ValidateCard(number));
         }
 
         [Fact]
@@ -116,7 +106,7 @@ namespace EShop.Application.Tests
         [Theory]
         [InlineData("5131208517986691","MasterCard")]
         [InlineData("4532 2080 2150 4434", "Visa")]
-        [InlineData("345-470-784-783-010", "American Express")]
+        [InlineData("345-470-784-783-010", "AmericanExpress")]
         public void GetCardType_WhenGivenNumber_ReturnsCorrectType(string number, string expected_type)
         {
 

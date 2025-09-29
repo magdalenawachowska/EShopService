@@ -20,21 +20,18 @@ namespace EShop.Domain.Seeders
 
         public async Task Seed()
         {
-            if (await _context.Database.CanConnectAsync())
-            {
-                if (!_context.Products.Any())                                  //sprawdzamy czy jest pusta
-                {
 
-                    var products = new List<Product>
+            if (!_context.Products.Any())                               
                 {
-                   new Product { Name= "Phone", Ean="1234"},
-                   new Product { Name= "Computer", Ean="4567" },
-                   new Product { Name="Headphones", Ean="8910" }
-                };
+                    var products = new List<Product>
+                    {
+                       new Product { Name= "Phone", Ean="1234", Price=799.99m},
+                       new Product { Name= "Computer", Ean="4567", Price=4999.99m },
+                       new Product { Name="Headphones", Ean="8910", Price=349.99m }
+                    };
                     _context.Products.AddRange(products);
                     await _context.SaveChangesAsync();
                 }
-            }
         }
     }
 }

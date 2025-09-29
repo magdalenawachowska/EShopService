@@ -2,6 +2,7 @@
 using EShop.Application.Service;
 using EShop.Domain.Models;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EShopService.Controllers          
 {
@@ -22,8 +23,7 @@ namespace EShopService.Controllers
             var result = await _productService.GetAllAsync();
             return Ok(result);
         }
-    
-
+   
         // GET api/<ProductController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
@@ -31,21 +31,23 @@ namespace EShopService.Controllers
             var result = await _productService.GetAsync(id);
             if (result == null)
             {
-                return NotFound();
+                return NotFound(new {Id = id, Message ="Product not found"});
             }
             return Ok(result);
-
         }
 
         // POST api/<ProductController>
+        [Authorize(Policy = "EmployeeOnly")]
         [HttpPost]
+      
         public async Task<ActionResult> Post([FromBody] Product product)
         {
-            var result = await _productService.Add(product);
+            var result = await _productService.AddAsync(product);
             return Ok(result);
         }
 
         // PUT api/<ProductController>/5
+        [Authorize(Policy = "EmployeeOnly")]
         [HttpPut("{id}")]
         public async Task <ActionResult> Put(int id, [FromBody] Product product)
         {
@@ -58,11 +60,20 @@ namespace EShopService.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var product = await _productService.GetAsync(id);
+            if (product is null)
+                return NotFound(new { id, message = "Product not found" });
+
             product.Deleted = true;
             var result = await _productService.UpdateAsync(product);
 
+            //var result= await _productService.DeleteAsync(id);       //będzie - hard delete, ale nie pasuje do testów więc tylko oznaczam flagą dany produkt
             return Ok(result);
         }
-
+        [HttpPatch]
+        public ActionResult Add([FromBody] Product product)
+        {
+            var result = _productService.Add(product);
+            return Ok(result);
+        }
     }
 }

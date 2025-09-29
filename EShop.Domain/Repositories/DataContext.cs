@@ -10,16 +10,15 @@ namespace EShop.Domain.Models
 {
     public class DataContext : DbContext
     {
-
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
-        public DbSet<Product> Products { get; set; }               //przeksztalcenie na encje bazodanowa  - reprezentacja tabeli "Products"
+        public DbSet<Product> Products { get; set; }              
+        public DbSet<Category> Categories { get; set; } = default!;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)       
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ProductsDb;Trusted_Connection=True;");
-
+            modelBuilder.Entity<Product>().HasQueryFilter(p => !p.Deleted);
+            base.OnModelCreating(modelBuilder);
         }
-
     }
 }

@@ -27,7 +27,7 @@ namespace EShop.Service.Tests.Controllers
         public async Task Get_ShouldReturnAllProducts_ReturnTrue()
         {
             //Arrange
-            var products = new List<Product> { new Product(), new Product() };
+            var products = new List<Product> { new Product() { Name="FirstMockProduct"}, new Product() { Name = "SecondMockProduct" } };
             _mockService.Setup(s => s.GetAllAsync()).ReturnsAsync(products);
 
             //Act
@@ -71,13 +71,13 @@ namespace EShop.Service.Tests.Controllers
         {
             //Arrange
             var newProduct = new Product();
-            _mockService.Setup(s => s.Add(It.IsAny<Product>())).ReturnsAsync(newProduct);
+            _mockService.Setup(s => s.AddAsync(It.IsAny<Product>())).ReturnsAsync(newProduct);
 
             //Act
             var result = await _controller.Post(newProduct);
 
             //Assert
-            _mockService.Verify(s => s.Add(newProduct), Times.Once);
+            _mockService.Verify(s => s.AddAsync(newProduct), Times.Once);
             Assert.IsType<OkObjectResult>(result);
 
         }
