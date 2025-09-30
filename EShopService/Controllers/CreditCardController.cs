@@ -3,6 +3,7 @@ using EShop.Domain.Exceptions;
 using EShop.Domain.Models;
 using System.Net;
 using EShop.Application.Service;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EShopService.Controllers
 {
@@ -18,6 +19,7 @@ namespace EShopService.Controllers
             _creditCardService = creditCardService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Get(string cardNumber)
         {
@@ -50,6 +52,7 @@ namespace EShopService.Controllers
 
 
         // POST api/<CreditCardCoontroller>
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Post([FromBody] Card card)
         {
@@ -57,6 +60,7 @@ namespace EShopService.Controllers
         }
 
         // PUT api/<CreditCardCoontroller>/5
+        [Authorize(Policy = "EmployeeOnly")]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Card updatedCard)
         {
@@ -64,6 +68,7 @@ namespace EShopService.Controllers
         }
 
         // DELETE api/<CreditCardCoontroller>/5
+        [Authorize(Policy = "EmployeeOnly")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

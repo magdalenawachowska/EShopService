@@ -25,6 +25,7 @@ namespace UserService.Controllers
             return Ok("Dane tylko dla administratora");
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Login([FromBody] User.Domain.Requests.LoginRequest request)
         {

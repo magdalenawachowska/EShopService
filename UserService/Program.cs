@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using User.Application.Services;
 using User.Domain.Models;
+using User.Domain.Profiles;
 using User.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -22,6 +23,10 @@ var jwtSettings = builder.Configuration.GetSection("Jwt");           //wczyta da
 builder.Services.Configure<JwtSettings>(jwtSettings);
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();                      //dodane do DI
 builder.Services.AddScoped<ILoginService, LoginService>();
+
+builder.Services.AddScoped<IUserService, User.Application.Services.UserService>();
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
 builder.Services.AddAuthentication(options =>

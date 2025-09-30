@@ -17,14 +17,16 @@ namespace EShopService.Controllers
         }
 
         // GET: api/<ProductController>
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult> Get()
         {
             var result = await _productService.GetAllAsync();
             return Ok(result);
         }
-   
+
         // GET api/<ProductController>/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {
@@ -39,7 +41,6 @@ namespace EShopService.Controllers
         // POST api/<ProductController>
         [Authorize(Policy = "EmployeeOnly")]
         [HttpPost]
-      
         public async Task<ActionResult> Post([FromBody] Product product)
         {
             var result = await _productService.AddAsync(product);
@@ -56,6 +57,7 @@ namespace EShopService.Controllers
         }
 
         // DELETE api/<ProductController>/5
+        [Authorize(Policy = "EmployeeOnly")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
@@ -69,7 +71,9 @@ namespace EShopService.Controllers
             //var result= await _productService.DeleteAsync(id);       //będzie - hard delete, ale nie pasuje do testów więc tylko oznaczam flagą dany produkt
             return Ok(result);
         }
-        [HttpPatch]
+
+        [Authorize(Policy = "EmployeeOnly")]
+        [HttpPost]
         public ActionResult Add([FromBody] Product product)
         {
             var result = _productService.Add(product);
